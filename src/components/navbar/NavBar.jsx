@@ -6,12 +6,13 @@ const NavBar = () => {
   const {pathname} = useLocation()
   const bg = {
     "/":'#ff9399',
-    "/countdown":'#55bbd3',
+    "/stopwatch":'#55bbd3',
     "/timer":'#3888ca'
   } 
   return (
     <NavBarContainer bg={bg[pathname]} >
     <div>
+    {/* {Object.keys(bg).findIndex((e)=> e === pathname)} */}
       <ClockLogo/>
     </div>
       <Tabs align='center' marginBottom='-2px' size="lg"
@@ -20,11 +21,11 @@ const NavBar = () => {
         <Link to="/">
           <Tab fontWeight="bold"  _selected={{color:'#fff4f4',borderColor:'#ff9399'}} _focus={{ boxShadow: "none", }}> Clock</Tab>
         </Link>
-        <Link to="/countdown">
-          <Tab fontWeight="bold" _selected={{color:'#e3faff',borderColor:'#55bbd3'}} _focus={{ boxShadow: "none", }}> CountDown</Tab> 
+        <Link to="/stopwatch">
+          <Tab fontWeight="bold" _selected={{color:'#e3faff',borderColor:'#55bbd3'}} _focus={{ boxShadow: "none", }}> StopWatch</Tab> 
         </Link>
         <Link to="/timer">
-          <Tab fontWeight="bold" _selected={{color:'#e4edff',borderColor:'#3888ca',outline:"none"}} _focus={{ boxShadow: "none", }}> Timer</Tab>
+          <Tab fontWeight="bold" _selected={{color:'#e4edff',borderColor:'#3888ca'}} _focus={{ boxShadow: "none", }}> Timer</Tab>
         </Link>
         </TabList>
       </Tabs>

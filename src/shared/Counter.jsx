@@ -1,32 +1,22 @@
-import React, {useState,useEffect} from 'react'
-import {Button, Input, Text} from '@chakra-ui/react'
+import React, {useState,useEffect, useRef} from 'react'
+import {Button, Text} from '@chakra-ui/react'
 import {TriangleDownIcon,TriangleUpIcon} from '@chakra-ui/icons'
 import {useDispatch} from 'react-redux'
+import { Numbers } from './styles'
 
-const Counter = ({isRunning,value,action}) => {
+const Counter = ({title,value,action,secondsLeft }) => {
   const dispatch = useDispatch()
   const [valuel, setValuel] = useState(0) 
   const [valuer, setValuer] = useState(0) 
-  const [display,setDisplay] = useState(0)
-
+  const [id,setId] = useState(0)
+  const ref = useRef("")
   useEffect(() => {
     dispatch(action(valuel * 10 + valuer))
   }, [valuel,valuer])
 
-  
-  useEffect(()=>{
-    if (value !== undefined){
-      const array = value.toString().split("")
-      if (array.length < 2) array.unshift(0)
-      setDisplay(array)
-    }
-    if (!value){
-      setValuel(0)
-      setValuer(0)
-    }
-  },[value])
 
   const changeValue = (number) =>{
+ 
     switch (true) {
       case number + valuer > 9:
         setValuer(0)
@@ -40,18 +30,30 @@ const Counter = ({isRunning,value,action}) => {
         setValuer(value => value + number)
     }
   }
+
+  const shouldClick = () =>{
+    if (id) {
+      setId(0)
+      return false
+    } else {
+      return true
+    }
+  }
   const numbersOnly = (event) => {
     if (!/[0-9]/.test(event.key)) {
       event.preventDefault();
     }
   }
-  const onChange = (event) =>{
-    const {id,value} = event.target
-    if (id == 'left'){
-      setValuel(value ? parseInt(value) : '')
-    } else {
-      setValuer(value ? parseInt(value) : '')
-    }
+  const onMouseDown = (event) =>{
+    let id = setInterval(() => {
+      ref.current.click()
+    }, 500);
+    setId(id)
+  }
+
+  const onMouseUp = () =>{
+    console.log("Mouse up!")
+    clearInterval(id)
   }
 
   const upperNumber = () =>{
@@ -61,29 +63,30 @@ const Counter = ({isRunning,value,action}) => {
     } else if (value < 10){
       return "0" + value
     } else {
-      return valuer+1 > 9 ? `${valuel + 1} ${0}` : `${valuel} ${valuer+1}` 
+      return valuer+1 > 9 ? `${valuel + 1}${0}` : `${valuel}${valuer+1}` 
     }
 
 
   }
   return (
-    <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}> 
-
-        <Button size="lg" variant='ghost'onClick={()=>changeValue(1)}>
+    <div style={{display:"flex",flexDirection:"column",alignItems:"center"}} > 
+        <Text fontSize={'3xl'} className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}>
+          {title}
+        </Text>
+        <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}} size="lg" variant='ghost' ref={ref} onClick={()=>changeValue(1)} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
           <TriangleUpIcon/>
         </Button>
           {/* <Text fontSize={'4xl'} color="#555555" >
           {upperNumber()}
           </Text> */}
         <div>
-     
-        <Input id="left" variant='unstyled'  size="lg" fontSize={'4xl'} width="2.1ch"  padding={'10px'} value={ value || isRunning ? display[0] : valuel  } onChange={onChange} color="#555555"  maxLength={1} />
-        <Input id="right" variant='unstyled'  size="lg" fontSize={'4xl'} width="2.1ch"  padding={'10px'} value={value || isRunning ? display[1] : valuer} onChange={onChange} color="#555555" maxLength={1} />
+        <div>
+          <Numbers>
+            { secondsLeft && value <= 9 ? "0" + value : secondsLeft && value ? value : valuel + "" + valuer}
+          </Numbers>
         </div>
-        <Text fontSize={'4xl'} color="#555555" >
-          {upperNumber()}
-          </Text>
-        <Button size="lg" variant='ghost' onClick={()=>changeValue(-1)}>
+        </div>
+        <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}  size="lg" variant='ghost' onClick={()=>changeValue(-1)}>
           <TriangleDownIcon/>
         </Button>
     </div>

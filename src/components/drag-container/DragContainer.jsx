@@ -6,28 +6,17 @@ import Clock from '../clock/Clock'
 import Timer from '../timer/Timer'
 
 const DragContainer = () => {
-  const {pathname} = useLocation()
   const [{isDragging},drag] = useDrag(()=>({
     type:"clock",
     collect:(monitor)=> ({
       isDragging: !!monitor.isDragging()
     })
   }))
-  const clock = () =>{
-    switch (pathname) {
-      case '/countdown':
-        return <p>countdown</p>
-      case '/timer':
-        return <Timer/>
-      default:
-        return <Clock/>
-    }
-    
-  }
+
   return (
-    <DragDiv isDragging={isDragging} ref={drag}>
-      {clock()}
-    </DragDiv>
+    <div ref={drag} style={{height:"100%",width:"100%"}} >
+      <Clock isDragging/>
+    </div>
 
   )
 }
