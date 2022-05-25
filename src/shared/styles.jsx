@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import clock from '../assets/images/clock.png'
-import {Text} from "@chakra-ui/react"
+import {Text, SliderThumb} from "@chakra-ui/react"
  export const NavBarContainer = styled.div`
   height: fit-content;
   border-bottom:1px solid #e2dcdc;
@@ -37,7 +37,7 @@ export const DragDiv = styled.div`
 export const DropableContainer = styled.div`
   height: 100%;
   width: 100%;
-  background:${props => !props.isOver ? 'lightblue' : 'lightgray'};
+  background:${props => !props.isOver ? 'transparent' : 'lightgray'};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@ export const DropableContainer = styled.div`
 
 export const Row = styled.div`
   display:flex;
-  height:33%;
+  height:33.33%;
   
 `
 
@@ -68,4 +68,46 @@ export const Numbers = styled(Text)`
 export const FooterContainer = styled.div`
   width:100%;
   height: 200px;
+`
+
+const Input = styled.input`
+ cursor: pointer;
+  &[type='color'] {
+    width:100%;
+    height:100%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #0000001A;
+    transform: scale(1.5);
+}
+`
+
+const ColorContainer = styled.div`
+    width:30px;
+    height:30px;
+    overflow: hidden;
+    border-radius:100%;
+`
+
+export const ColorPicker = (props) => (  
+<ColorContainer>
+  <Input {...props}/>
+</ColorContainer>)
+
+export const ColorSlider = styled(SliderThumb)`
+  height:35px !important;
+  border-radius:3px !important;
+  &:after{
+    height: 35px;
+    width: 40px;
+    content: '${props => props.value}';
+    background: lightgray;
+    border-radius: 3px;
+    clip-path: polygon(50% 0%,65% 25%,100% 25%,100% 100%,0 100%,0 25%,35% 25%);
+    position: absolute;
+    top: 37px;
+    text-align:center;
+    padding-top:10px;
+    font-weight:bold;
+
+  }
 `

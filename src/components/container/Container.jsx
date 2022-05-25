@@ -6,13 +6,11 @@ import Timer from '../timer/Timer'
 import StopWatch from '../stopwatch/StopWatch'
 const Container = () => {
   return (
-    <div style={{height:"100vh"}}>
     <Routes>
       <Route path="/" element={<ClockContainer/>}/>
       <Route path="/stopwatch" element={<CenterContainer element={<StopWatch/>}/>}/>
       <Route path="/timer" element={<CenterContainer element={<Timer/>}/>}/>
     </Routes>
-    </div>
   )
 }
 
