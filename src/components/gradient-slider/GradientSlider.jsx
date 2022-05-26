@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {  Box, GridItem, SliderTrack, SliderFilledTrack, Slider, Button, SimpleGrid, Badge} from '@chakra-ui/react'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus, FaTimes} from 'react-icons/fa'
 import { ColorSlider, ColorPicker } from '../../shared/styles'
 import {RgbaStringColorPicker} from 'react-colorful'
 import { setBgColor } from '../../redux/reducers/bgReducer'
@@ -47,8 +47,11 @@ const GradientSlider = () => {
     setSliders(sliders.map((e,i)=> i === index ? {...e,value}: {...e}))
   }
   
-  const gradientBg = () => {
+  const removeSlider = (index) =>{
+    setSliders(sliders.filter((e,i) => i !== index ))
+  }
 
+  const gradientBg = () => {
     const bg = sliders.map(e => e).sort((a,b)=> a.value - b.value).reduce((acc,{color,value})=> acc.concat(` , ${color + ' ' + value + '%'}`),'')
     return `linear-gradient(to right ${bg} )`
   }
@@ -82,7 +85,8 @@ const GradientSlider = () => {
           {/* <SlidersList/> */}
            <SimpleGrid columns="1">
           {sliders.map((e,index)=>(
-            <Box maxW='sm' w="100px" h="50px" m="2px auto" borderWidth='1px' borderRadius='sm' my="3px">
+            <Box maxW='sm' w="100px" h="fit-content" m="2px auto" borderWidth='1px' borderRadius='sm' my="3px">
+                <FaTimes onClick={()=>removeSlider(index)} style={{marginLeft:"auto",marginRight:"2px", cursor:"pointer"}}/>
               <Box display="flex" alignItems="center" justifyContent="space-around">
                 <Badge size="lg" colorScheme='green' height="fit-content">
                   {e.value} %
