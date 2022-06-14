@@ -7,11 +7,9 @@ import {HTML5Backend} from 'react-dnd-html5-backend'
 import {ChakraProvider} from '@chakra-ui/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <DndProvider backend={HTML5Backend}>
       <ChakraProvider>
         <App />
       </ChakraProvider>
     </DndProvider>
-  </React.StrictMode>
 )

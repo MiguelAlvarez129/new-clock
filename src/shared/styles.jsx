@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import clock from '../assets/images/clock.png'
-import {Text, SliderThumb} from "@chakra-ui/react"
+import {Text, SliderThumb, Slider, GridItem, Alert} from "@chakra-ui/react"
+
  export const NavBarContainer = styled.div`
   height: fit-content;
   border-bottom:1px solid #e2dcdc;
@@ -67,7 +68,9 @@ export const Numbers = styled(Text)`
 
 export const FooterContainer = styled.div`
   width:100%;
-  height: 200px;
+  height: fit-content;
+  padding:10px;
+  ${props => 'background:'+ props.bg }
 `
 
 const Input = styled.input`
@@ -96,10 +99,11 @@ export const ColorPicker = (props) => (
 export const ColorSlider = styled(SliderThumb)`
   height:35px !important;
   border-radius:3px !important;
+  border:lightgray solid 1px !important;
   &:after{
     height: 35px;
     width: 40px;
-    content: '${props => props.value}';
+    content: '${props => props.value}%';
     background: lightgray;
     border-radius: 3px;
     clip-path: polygon(50% 0%,65% 25%,100% 25%,100% 100%,0 100%,0 25%,35% 25%);
@@ -110,4 +114,52 @@ export const ColorSlider = styled(SliderThumb)`
     font-weight:bold;
 
   }
+`
+
+export const CustomSlider = styled(Slider)`
+  padding: 0px !important;
+  top: ${props => props.index * -24 - 26}px;
+  display:block;
+  position:absolute;
+`
+
+export const ColorItem = styled.div`
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:5px;
+  margin:10px 5px;
+  border-radius:5px;
+  border-width:2px;
+  border-style:solid;
+  cursor:pointer;
+  border-color:${props => props.selected ? "dodgerblue" : "lightgray"};
+  background:${props => props.selected ? "lightblue" : "#eeeeee"};
+  transition: background .5s, border-color .5s;
+
+`
+
+export const Item = styled(GridItem)`
+  padding: 10px;
+  background:white;
+  border-radius:5px;
+  height:fit-content;
+`
+export const CustomAlert = styled(Alert)`
+  position:fixed !important;
+  left: calc(50% - 150px);
+  width: 300px !important;
+  border-radius: 4px;
+  top: 10px;
+  justify-content:center;
+  background: rgb(195 244 255 / 80%) !important;
+  opacity: ${props => props.$show ? 1 : 0};
+  transition: opacity 3s;
+  /* animation: appear 6s initial;
+
+@keyframes appear{
+  0% { opacity:0}
+  50% { opacity:1}
+  100% { opacity:0}
+} */
 `

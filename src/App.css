@@ -14,3 +14,12 @@ h1,h2,h3,h4,h5,h6{
   font-weight: initial;
 
 }
+
+div[style="position: relative; margin-bottom: calc(1.5rem);"]:after{
+  content: 'º'; 
+}
+
+div[style="position: relative; display: inline-block; opacity: 1; transition: opacity 1s ease-in 0s;"]{
+  transition: none !important;
+}
+

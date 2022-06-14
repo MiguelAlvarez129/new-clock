@@ -5,7 +5,7 @@ import { selectBgColor } from '../../redux/reducers/bgReducer'
 const CenterContainer = ({element}) => {
   const backgroundColor = useSelector(selectBgColor)
   return (
-    <Center height="100vh" backgroundColor={backgroundColor} >
+    <Center height="100vh" background={backgroundColor} >
      {element}
     </Center>
   )
