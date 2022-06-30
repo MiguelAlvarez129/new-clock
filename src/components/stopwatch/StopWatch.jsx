@@ -16,15 +16,8 @@ const StopWatch = () => {
     reset,
   } = useStopwatch({ autoStart: false });
 
-  const stop = () =>{
-    reset()
-    pause()
-  }
   return (
     <div>
-      {hours}
-      {minutes}
-      {seconds}
     <Flex direction="row" justifyContent="center" alignItems="baseline" fontFamily="Roboto">
       <Numbers fontSize="70px" padding="0 24px">
           { hours <= 9 ? "0" + hours : hours} 
@@ -45,12 +38,12 @@ const StopWatch = () => {
     </Flex>
     <ButtonBar>
       <Button onClick={start} disabled={isRunning && !!seconds}>
-        {isRunning || !!seconds ? 'Resume' : 'Start'}
+        {isRunning && !!seconds ? 'Resume' : 'Start'}
       </Button>
       <Button onClick={pause}>
         Pause
       </Button>
-      <Button  onClick={stop}>
+      <Button  onClick={()=>reset(null,false)}>
         Reset
       </Button>
     </ButtonBar>

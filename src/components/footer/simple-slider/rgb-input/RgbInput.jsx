@@ -15,9 +15,6 @@ const RgbInput = () => {
       (
         <ColorInput key={index} label={labels[index]} initialValue={array[index]} index={index}/>
       ))}
-      {/* <ColorInput label="R" initialValue={array[0]} index={0}/>
-      <ColorInput label="G" initialValue={array[1]} index={1}/>
-      <ColorInput label="B" initialValue={array[2]} index={2}/> */}
     </div>
   )
 }

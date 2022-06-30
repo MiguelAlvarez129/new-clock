@@ -2,12 +2,12 @@ import React from 'react'
 import { Center } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
 import { selectBgColor } from '../../redux/reducers/bgReducer'
-const CenterContainer = ({element}) => {
+const CenterContainer = ({element,refValue}) => {
   const backgroundColor = useSelector(selectBgColor)
   return (
-    <Center height="100vh" background={backgroundColor} >
+    <div ref={refValue} style= {{height:"100vh",background:backgroundColor,justifyContent:"center",alignItems:"center",display:"flex"}} >
      {element}
-    </Center>
+    </div>
   )
 }
 

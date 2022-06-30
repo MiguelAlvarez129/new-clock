@@ -10,7 +10,7 @@ import CircularSlider from '@fseehawer/react-circular-slider'
 const GradientSlider = ({bgType}) => {
 
   const getSliders = () => {
-    return localStorage.getItem("sliders") ? JSON.parse(localStorage.getItem("sliders")) : [{color:'#FA8072',value:"0",id:0}, {color:'#123245',value:"10",id:1}]
+    return JSON.parse(localStorage.getItem("sliders")) 
   }
 
   const [sliders, setSliders] = useState(getSliders())
@@ -22,12 +22,7 @@ const GradientSlider = ({bgType}) => {
     const colors = gradientColors()
     const bg = `linear-gradient(${deg}deg ${colors} )`
     dispatch(setBgColor(bg))
-    
-    return () =>{
-      localStorage.setItem("sliders",JSON.stringify(sliders))
-      localStorage.setItem("deg",deg)
-    }
-  }, [sliders,deg,bgType])
+  }, [sliders,deg])
   
   useEffect(() => {
     setColor(sliders[sliders.length-1])
@@ -71,7 +66,7 @@ const GradientSlider = ({bgType}) => {
 
   return (
     <>
-      <Item colSpan="4">
+      <Item colStart="2"  colEnd="6" rowStart="1" rowEnd="2">
           <Box  w='100%' h='20px' borderRadius="3px" border="lightgray solid 1px" background={`linear-gradient(to right ${gradientColors()})`} 
             onClick={(event) => console.log(event)}>
           </Box>

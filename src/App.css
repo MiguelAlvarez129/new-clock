@@ -1,5 +1,10 @@
 body{
   font-family: Roboto !important;
+  scroll-behavior: smooth !important;
+}
+
+html{
+  scroll-behavior: smooth !important;
 }
 button {
   font-size: calc(10px + 2vmin);
@@ -9,6 +14,61 @@ button {
   font-family: Roboto;
   src: url(./assets/fonts/Roboto-Regular.ttf);
 }
+
+@font-face {
+  font-family: RobotoMono;
+  src: url(./assets/fonts/RobotoMono-Regular.ttf);
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  src: url(./assets/fonts/PlayfairDisplay-Regular.ttf);
+}
+
+
+@font-face {
+  font-family: Oswald-Regular;
+  src: url(./assets/fonts/Oswald-Regular.ttf);
+}
+
+@font-face {
+  font-family: Merriweather;
+  src: url(./assets/fonts/Merriweather.ttf);
+}
+
+@font-face {
+  font-family: LobsterTwo;
+  src: url(./assets/fonts/LobsterTwo-Regular.ttf);
+}
+
+@font-face {
+  font-family: Lobster;
+  src: url(./assets/fonts/Lobster-Regular.ttf);
+}
+
+@font-face {
+  font-family: KdamThmorPro;
+  src: url(./assets/fonts/KdamThmorPro-Regular.ttf);
+}
+
+@font-face {
+  font-family: Fascinate;
+  src: url(./assets/fonts/Fascinate-Regular.ttf);
+}
+
+@font-face {
+  font-family: Dosis;
+  src: url(./assets/fonts/Dosis-Regular.ttf);
+}
+
+@font-face {
+  font-family: Anton;
+  src: url(./assets/fonts/Anton-Regular.ttf);
+}
+
+
+
+
 h1,h2,h3,h4,h5,h6{
   font-size: initial !important;
   font-weight: initial;

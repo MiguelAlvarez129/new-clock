@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import clock from '../assets/images/clock.png'
+import draggif from '../assets/images/dragndrop.gif'
 import {Text, SliderThumb, Slider, GridItem, Alert} from "@chakra-ui/react"
 
  export const NavBarContainer = styled.div`
@@ -64,6 +65,19 @@ export const Numbers = styled(Text)`
   margin-top: ${props => props.marginTop};
   font-weight:bold;
   font-size: ${props => props.small ? '30px' : '70px'};
+
+  /* &:after{
+    opacity:0.5;
+    display:block;
+    transform:scale(0.7);
+   content:'${props => props.after}';
+  }
+  &:before{
+    opacity:0.5;
+    display:block;
+    transform:scale(0.7);
+   content:'${props => props.before}';
+  } */
 `
 
 export const FooterContainer = styled.div`
@@ -152,14 +166,46 @@ export const CustomAlert = styled(Alert)`
   border-radius: 4px;
   top: 10px;
   justify-content:center;
-  background: rgb(195 244 255 / 80%) !important;
+  background: rgb(195 244 255 / 90%) !important;
   opacity: ${props => props.$show ? 1 : 0};
-  transition: opacity 3s;
-  /* animation: appear 6s initial;
+  z-index: ${props => props.$show ? 1 : -1};
+  /* animation: appear 3s ${props => props.$show ? 'backwards' : 'forwards'}; */
+  cursor: pointer;
+  /* z-index: 1000; */
+  transition: opacity 3s, z-index 6s;
+
+  
 
 @keyframes appear{
   0% { opacity:0}
-  50% { opacity:1}
-  100% { opacity:0}
-} */
+  100% {opacity:1}
+}
+
+`
+export const DragSign = styled.div`
+  position:fixed !important;
+  height: 329px;
+  top: 100px;
+  left: calc(50% - 300px);
+  z-index: 1000;
+  width: 600px !important;
+  background-color: #f5f5dcb5 !important;
+  flex-direction:column ;
+  animation: appear 1s;
+  padding: 10px;
+  align-items: center;
+  display: flex;
+`
+
+export const DragImg = styled.div`
+  background-image:url(${draggif});
+  height: 100%;
+  display: block;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 10px ;
+
+
 `

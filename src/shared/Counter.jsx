@@ -63,30 +63,45 @@ const Counter = ({title,value,action,secondsLeft }) => {
     } else if (value < 10){
       return "0" + value
     } else {
-      return valuer+1 > 9 ? `${valuel + 1}${0}` : `${valuel}${valuer+1}` 
+      return value
     }
+  }
 
-
+  const lowerNumber = () =>{
+    const value = valuel * 10 + valuer - 1;
+    if (value < 0){
+      return "59"
+    } else if (value < 10){
+      return "0" + value
+    } else {
+      return value
+    }
   }
   return (
     <div style={{display:"flex",flexDirection:"column",alignItems:"center"}} > 
         <Text fontSize={'3xl'} className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}>
           {title}
         </Text>
-        <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}} size="lg" variant='ghost' ref={ref} onClick={()=>changeValue(1)} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+        <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}   size="lg" variant='ghost' colorScheme='blackAlpha' ref={ref} onClick={()=>changeValue(1)} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
           <TriangleUpIcon/>
         </Button>
           {/* <Text fontSize={'4xl'} color="#555555" >
           {upperNumber()}
           </Text> */}
+          {/* <Numbers>
+            {upperNumber()}
+          </Numbers> */}
+     
         <div>
-        <div>
-          <Numbers>
+          <Numbers after={lowerNumber()}  before={upperNumber()}>
             { secondsLeft && value <= 9 ? "0" + value : secondsLeft && value ? value : valuel + "" + valuer}
           </Numbers>
         </div>
-        </div>
-        <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}  size="lg" variant='ghost' onClick={()=>changeValue(-1)}>
+
+          {/* <Numbers>
+            {lowerNumber()}
+          </Numbers> */}
+        <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}} size="lg" variant='ghost' colorScheme='blackAlpha' onClick={()=>changeValue(-1)}>
           <TriangleDownIcon/>
         </Button>
     </div>
