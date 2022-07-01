@@ -14,14 +14,14 @@ const SimpleSlider = () => {
 
   return (
   <>
-    <Item  colStart={2} colEnd={4} rowStart={1} rowEnd={3}>
+    <Item  colStart={2} colEnd={{base:5,md:4}} rowStart={1} rowEnd={3}>
     <RgbStringColorPicker color={color} onChange={(color)=> dispatch(setBgColor(color)) } style={{width:'100%',maxWidth:'400px',margin:'auto'}}/>
     </Item>
-   <Item colStart={4} colEnd={5} rowStart={1} rowEnd={3} >
+   <Item colStart={{base:5,md:4}} colEnd={{base:6,md:5}} rowStart={1} rowEnd={3} >
   
-    <div>
+
       <RgbInput />  
-    </div>
+
     </Item>
   </>
   )

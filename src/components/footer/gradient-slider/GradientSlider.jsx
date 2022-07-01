@@ -66,11 +66,10 @@ const GradientSlider = ({bgType}) => {
 
   return (
     <>
-      <Item colStart="2"  colEnd="6" rowStart="1" rowEnd="2">
+      <Item colStart={{base:1,lg:2}}  colEnd="6" rowStart="1" rowEnd="2">
           <Box  w='100%' h='20px' borderRadius="3px" border="lightgray solid 1px" background={`linear-gradient(to right ${gradientColors()})`} 
             onClick={(event) => console.log(event)}>
           </Box>
-          {/* <RenderSliders /> */}
       <div style={{height:0}}>
         {
           sliders.map((e,index)=> (
