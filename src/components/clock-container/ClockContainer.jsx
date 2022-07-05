@@ -9,7 +9,7 @@ const ClockContainer = ({refValue}) => {
 
 
   return (
-    <div id="clock-container"  ref={refValue} style={{height:'100vh',borderBottom:'1px solid lightgray',background}}>
+    <div id="clock-container"  ref={refValue} style={{height:'100vh',background}}>
       
       {Array(3).fill('').map((e,i)=>{
         return (

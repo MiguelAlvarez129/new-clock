@@ -52,7 +52,7 @@ const Container = () => {
         Click here to center the screen
       </AlertTitle>
     </CustomAlert>
-    { isVisible && <DragSign>
+    {/* { isVisible && <DragSign>
       <b>
         You can click and drag the clock to a different space
       </b>
@@ -60,7 +60,7 @@ const Container = () => {
       <Button colorScheme='teal' variant='ghost' onClick={onClose}>
         Understood!
       </Button>
-    </DragSign> } 
+    </DragSign> }  */}
     <Routes>
       <Route path="/" element={<ClockContainer refValue={ref}/>}/>
       <Route path="/stopwatch" element={<CenterContainer  refValue={ref} element={<StopWatch/>}/>}/>

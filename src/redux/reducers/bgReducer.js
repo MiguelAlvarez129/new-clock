@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState ={
   color: localStorage.getItem('simpleColor') || 'rgb(238, 82, 82)',
   bgType:false,
+  fontFamily: localStorage.getItem('fontFamily') ||  'Roboto',
+  fontColor: localStorage.getItem('fontColor') ||  '#000000',
 }
 
 export const colorSlice = createSlice({
@@ -21,13 +23,21 @@ export const colorSlice = createSlice({
     },
     switchBgType:(state,action)=>{
       state.bgType = action.payload
+    },
+    switchFont:(state,action)=>{
+      state.fontFamily = action.payload
+    },
+    switchFontColor:(state,action)=>{
+      state.fontColor = action.payload
     }
   }
 })
 
 
-export const {setBgColor, setRgb, switchBgType} = colorSlice.actions;
+export const {setBgColor, setRgb, switchBgType, switchFont, switchFontColor} = colorSlice.actions;
 export const selectBgColor = ((state) => state.bgColor.color)
 export const selectBgType = ((state) => state.bgColor.bgType)
+export const selectFontFamily = ((state) => state.bgColor.fontFamily)
+export const selectFontColor = ((state) => state.bgColor.fontColor)
 
 export default colorSlice.reducer

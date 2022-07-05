@@ -4,6 +4,7 @@ import { useDispatch, useSelector} from 'react-redux'
 import { setBgColor, selectBgColor, selectBgType } from '../../../redux/reducers/bgReducer'
 import { RgbStringColorPicker} from "react-colorful"
 import RgbInput from './rgb-input/RgbInput'
+import { Show } from '@chakra-ui/react'
 
 
 
@@ -14,15 +15,14 @@ const SimpleSlider = () => {
 
   return (
   <>
-    <Item  colStart={2} colEnd={{base:5,md:4}} rowStart={1} rowEnd={3}>
-    <RgbStringColorPicker color={color} onChange={(color)=> dispatch(setBgColor(color)) } style={{width:'100%',maxWidth:'400px',margin:'auto'}}/>
+    <Item  colSpan={{base:4,lg:2}} gridRow={{base:3,md:2,lg:1}}>
+    <RgbStringColorPicker color={color} onChange={(color)=> dispatch(setBgColor(color)) } style={{width:'100%',margin:'auto'}}/>
     </Item>
-   <Item colStart={{base:5,md:4}} colEnd={{base:6,md:5}} rowStart={1} rowEnd={3} >
-  
-
-      <RgbInput />  
-
-    </Item>
+    <Show above='md'>
+      <Item colSpan={{base:2,lg:1}} gridRow={{base:2,md:1}} >
+        <RgbInput />  
+      </Item>
+    </Show>
   </>
   )
 }

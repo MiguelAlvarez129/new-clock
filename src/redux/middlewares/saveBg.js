@@ -3,11 +3,19 @@ import { setBgColor } from "../reducers/bgReducer";
 const  saveBg = store => next => action => {
   const {type,payload} = action;
   const {color} = store.getState().bgColor
+
+  if (type === 'bgColor/switchFont'){
+    localStorage.setItem('fontFamily',payload)
+  }
+
+  if (type === 'bgColor/switchFontColor'){
+    localStorage.setItem('fontColor',payload)
+  }
+
+  
   if (type === 'bgColor/switchBgType'){
     if (!payload){
-      console.log(false,color)
       const values = getValues(color)
-
       localStorage.setItem('deg',values[0])
       localStorage.setItem('sliders',JSON.stringify(values.slice(1)))
       store.dispatch(setBgColor(localStorage.getItem('simpleColor')))
@@ -32,7 +40,6 @@ const  saveBg = store => next => action => {
 }
 
 const getValues = (string) => {
-  console.log(string)
   string = string.split(/,|[()%]/g).filter(e => e.trim())
   return string.slice(1).map((e,index)=>{
     if (!index){

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {  Box, GridItem, SliderTrack, SliderFilledTrack, Button, Text, Input} from '@chakra-ui/react'
+import {  Box, SliderTrack, SliderFilledTrack, Button, Text, Input, SimpleGrid, Hide, Flex, Show} from '@chakra-ui/react'
 import { FaPlus, FaTimes} from 'react-icons/fa'
 import { ColorSlider, CustomSlider, ColorItem, Item} from '../../../shared/styles'
 import { HexColorPicker} from 'react-colorful'
@@ -7,7 +7,7 @@ import { setBgColor } from '../../../redux/reducers/bgReducer'
 import {useDispatch} from 'react-redux'
 import CircularSlider from '@fseehawer/react-circular-slider'
 
-const GradientSlider = ({bgType}) => {
+const GradientSlider = () => {
 
   const getSliders = () => {
     return JSON.parse(localStorage.getItem("sliders")) 
@@ -66,10 +66,8 @@ const GradientSlider = ({bgType}) => {
 
   return (
     <>
-      <Item colStart={{base:1,lg:2}}  colEnd="6" rowStart="1" rowEnd="2">
-          <Box  w='100%' h='20px' borderRadius="3px" border="lightgray solid 1px" background={`linear-gradient(to right ${gradientColors()})`} 
-            onClick={(event) => console.log(event)}>
-          </Box>
+      <Item colSpan={4} gridRow={1}>
+          <Box  w='100%' h='20px' borderRadius="3px" border="lightgray solid 1px" background={`linear-gradient(to right ${gradientColors()})`} onClick={(event) => console.log(event)}/>
       <div style={{height:0}}>
         {
           sliders.map((e,index)=> (
@@ -83,28 +81,46 @@ const GradientSlider = ({bgType}) => {
         }
       </div>
       </Item>
-      <Item colStart={2} colEnd={4}>
-          <HexColorPicker color={color.color} onChange={changeColor} style={{width:'100%',maxWidth:'400px',margin:"auto"}}/>
+      <Item colSpan={{base:4,md:2}} gridRow={{base:3,md:2}}>
+          <HexColorPicker color={color.color} onChange={changeColor} style={{width:'100%',margin:"auto"}}/>
       </Item>
-      <Item colSpan={1}>
-      <div style={{display: "flex",justifyContent: "space-between",alignItems: "center"}}>
-          <Button leftIcon={<FaPlus />} onClick={addSlider}>
-            Add Color
-          </Button>
-          <CircularSlider width={60} dataIndex={deg} knobSize={30} valueFontSize={20} label="*" trackSize={10} onChange={(value) => setDeg(value)}/>
-      </div>
-        {sliders.map((e,index)=>(
-          <ColorItem onClick={()=>selectColor(index)} key={index} selected={index == color.id }>
-            <Box w="40px" h="40px" borderRadius="5px" background={e.color}/>
-            <Text fontWeight="bold" fontSize="1.2rem" p="0 10px">
-              {e.value}%
-            </Text>
-            <Input type="text" value={e.color} readOnly bg="white" w="100px" />
-            <Button disabled={sliders.length === 2} onClick={(e)=>removeSlider(e,index)} size="xs" h="24px" w="24px" left="17px" bottom="22px" borderRadius="50%" colorScheme="red">
-              <FaTimes size={12} />
-            </Button>
-          </ColorItem>
-        ))}
+      <Item colSpan={{base:2,md:1}} >
+        <Flex justify={"space-between"} align={"center"}>
+            <Hide below="sm">
+              <Button leftIcon={<FaPlus />} onClick={addSlider}>
+                  Add Color
+              </Button>
+            </Hide>
+            <Show below="sm">
+              <Button onClick={addSlider}>
+                <FaPlus />
+              </Button>
+            </Show>
+            <CircularSlider width={60} dataIndex={deg} knobSize={30} valueFontSize={20} label="*" trackSize={10} onChange={(value) => setDeg(value)}/>
+        </Flex>
+          <SimpleGrid columns={2} spacing={"2"} mt="10px">
+          {sliders.map((e,index)=>(
+            <ColorItem colSpan={{base:1,lg:2}} background={{base:e.color,lg: index == color.id ? "lightblue" : "#eeeeee"}} onClick={()=>selectColor(index)} key={index} selected={index == color.id }>
+              <Flex w={"100%"} justify={{base:"space-around",lg:"space-evenly"}} align="center">
+              <Show below="lg">
+                <Text fontWeight="bold" fontSize="0.9rem" >
+                      {e.value}%
+                </Text>
+              </Show>
+                <Hide below="lg">
+                <Box w={{base:'100%',lg:'40px'}} h="40px" borderRadius="5px" background={e.color}/>
+                  <Text fontWeight="bold" fontSize="1.2rem" p="0 10px">
+                    {e.value}%
+                  </Text>
+                  <Input type="text" value={e.color} p={0} textAlign="center" readOnly bg="white" w="100px" />
+                </Hide>
+              <Button disabled={sliders.length === 2} onClick={(e)=>removeSlider(e,index)} size="xs" h="24px" w="24px" borderRadius="50%" colorScheme="red">
+                <FaTimes size={12} />
+              </Button>
+              </Flex>
+            </ColorItem>
+          ))} 
+          </SimpleGrid>
       </Item>
     </>
   )

@@ -33,6 +33,8 @@ export const DragDiv = styled.div`
   background: #dceef5b3;
   cursor: pointer;
   transition:transform 0.5s ease;
+  color:${props => props.color};
+  font-family:${props => props.fontFamily};
   ${props => props.isDragging && 'opacity:90%'}
 `
 
@@ -83,7 +85,6 @@ export const Numbers = styled(Text)`
 export const FooterContainer = styled.div`
   width:100%;
   height: fit-content;
-  padding:10px;
   ${props => 'background:'+ props.bg }
 `
 
@@ -137,12 +138,12 @@ export const CustomSlider = styled(Slider)`
   position:absolute;
 `
 
-export const ColorItem = styled.div`
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+export const ColorItem = styled(GridItem)`
+  // display:flex;
+  // justify-content:space-between;
+  // align-items:center;
   padding:5px;
-  margin:10px 5px;
+
   border-radius:5px;
   border-width:2px;
   border-style:solid;
@@ -150,13 +151,13 @@ export const ColorItem = styled.div`
   border-color:${props => props.selected ? "dodgerblue" : "lightgray"};
   background:${props => props.selected ? "lightblue" : "#eeeeee"};
   transition: background .5s, border-color .5s;
-
+  
 `
 
 export const Item = styled(GridItem)`
   padding: 10px;
   background:white;
-  border-radius:5px;
+  border-radius:2px;
   height:fit-content;
 `
 export const CustomAlert = styled(Alert)`

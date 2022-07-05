@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 const NavBar = () => {
   const {pathname} = useLocation()
   const bg = {
-    "/":'#ff9399',
+    "/": '#1d4f6d',
     "/stopwatch":'#55bbd3',
     "/timer":'#3888ca'
   } 
@@ -17,9 +17,9 @@ const NavBar = () => {
     </div>
       <Tabs align='center' marginBottom='-2px' size="lg"
       bg={bg[pathname]} transition="background 1s" color="white" defaultIndex={Object.keys(bg).findIndex((e)=> e === pathname)} >
-        <TabList>
+        <TabList border={0}>
         <Link to="/">
-          <Tab fontWeight="bold"  _selected={{color:'#fff4f4',borderColor:'#ff9399'}} _focus={{ boxShadow: "none", }}> Clock</Tab>
+          <Tab fontWeight="bold"  _selected={{color:'#fff4f4',borderColor:'#1d4f6d'}} _focus={{ boxShadow: "none", }}> Clock</Tab>
         </Link>
         <Link to="/stopwatch">
           <Tab fontWeight="bold" _selected={{color:'#e3faff',borderColor:'#55bbd3'}} _focus={{ boxShadow: "none", }}> StopWatch</Tab> 
