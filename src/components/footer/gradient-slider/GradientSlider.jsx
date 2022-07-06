@@ -37,9 +37,9 @@ const GradientSlider = () => {
   }
 
   const newSlider = () =>{
-    const color = "#" + new Array(3).fill(3).map(() => {
+    const color = "#" + new Array(3).fill("").map(() => {
       const hex = Math.floor((Math.random() * 100)).toString(16)
-      return hex.length === 1 ? "0" + hex : hex
+      return hex.length === 1 ? hex + "0" : hex
     }).join("")
 
     const value = Math.floor(Math.random() * 100)
@@ -62,6 +62,7 @@ const GradientSlider = () => {
   const removeSlider = (e,index) =>{
     e.stopPropagation()
     setSliders(sliders.filter((e,i) => i !== index ).map((e,index)=> ({...e,id:index})))
+    
   }
 
   return (
@@ -71,12 +72,12 @@ const GradientSlider = () => {
       <div style={{height:0}}>
         {
           sliders.map((e,index)=> (
-          <CustomSlider defaultValue={e.value} key={index} index={index} paddingTop="0px" onClick={()=>selectColor(index)} onChange={(value)=>onChange(value,index)}>
+          <CustomSlider value={e.value} key={index} index={index} paddingTop="0px" onClick={(e)=>selectColor(index)} onChange={(value)=>onChange(value,index)}>
           <SliderTrack background="transparent" p="0" >
             <SliderFilledTrack background="transparent" />
           </SliderTrack>
           <ColorSlider value={e.value} bg={e.color}  />
-        </CustomSlider>
+        </CustomSlider> 
         ))
         }
       </div>

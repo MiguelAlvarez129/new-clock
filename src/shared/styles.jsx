@@ -67,6 +67,8 @@ export const Numbers = styled(Text)`
   margin-top: ${props => props.marginTop};
   font-weight:bold;
   font-size: ${props => props.small ? '30px' : '70px'};
+  font-family: ${props => props.fontFamily};
+  color: ${props => props.color};
 
   /* &:after{
     opacity:0.5;

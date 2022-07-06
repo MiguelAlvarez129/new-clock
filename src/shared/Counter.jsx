@@ -1,11 +1,14 @@
 import React, {useState,useEffect, useRef} from 'react'
-import {Button, Text} from '@chakra-ui/react'
+import {Button, Text, Flex, propNames} from '@chakra-ui/react'
 import {TriangleDownIcon,TriangleUpIcon} from '@chakra-ui/icons'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { Numbers } from './styles'
+import { selectFontColor, selectFontFamily } from '../redux/reducers/bgReducer'
 
-const Counter = ({title,value,action,secondsLeft }) => {
+const Counter = ({title,value,action,secondsLeft,transform }) => {
   const dispatch = useDispatch()
+  const fontFamily = useSelector(selectFontFamily)
+  const fontColor = useSelector(selectFontColor)
   const [valuel, setValuel] = useState(0) 
   const [valuer, setValuer] = useState(0) 
   const [id,setId] = useState(0)
@@ -78,8 +81,8 @@ const Counter = ({title,value,action,secondsLeft }) => {
     }
   }
   return (
-    <div style={{display:"flex",flexDirection:"column",alignItems:"center"}} > 
-        <Text fontSize={'3xl'} className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}>
+    <Flex direction={'column'} align={"center"} transform={transform} transition={'transform .5s'}> 
+        <Text fontSize={{base:"xl",sm:"3xl"}} className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}>
           {title}
         </Text>
         <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}   size="lg" variant='ghost' colorScheme='blackAlpha' ref={ref} onClick={()=>changeValue(1)} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
@@ -93,7 +96,7 @@ const Counter = ({title,value,action,secondsLeft }) => {
           </Numbers> */}
      
         <div>
-          <Numbers after={lowerNumber()}  before={upperNumber()}>
+          <Numbers fontFamily={fontFamily} color={fontColor}>
             { secondsLeft && value <= 9 ? "0" + value : secondsLeft && value ? value : valuel + "" + valuer}
           </Numbers>
         </div>
@@ -104,7 +107,7 @@ const Counter = ({title,value,action,secondsLeft }) => {
         <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}} size="lg" variant='ghost' colorScheme='blackAlpha' onClick={()=>changeValue(-1)}>
           <TriangleDownIcon/>
         </Button>
-    </div>
+    </Flex>
   )
 }
 
