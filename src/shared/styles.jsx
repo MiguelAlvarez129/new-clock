@@ -56,8 +56,8 @@ export const Row = styled.div`
 
 export const ButtonBar = styled.div`
   width: fit-content;
-  margin:auto;
-
+  margin: 0 auto; 
+  height:70px;
   & > Button {
     margin:10px
   }
@@ -171,10 +171,9 @@ export const CustomAlert = styled(Alert)`
   justify-content:center;
   background: rgb(195 244 255 / 90%) !important;
   opacity: ${props => props.$show ? 1 : 0};
-  z-index: ${props => props.$show ? 1 : -1};
+  z-index: ${props => props.$show ? 10 : -1};
   /* animation: appear 3s ${props => props.$show ? 'backwards' : 'forwards'}; */
   cursor: pointer;
-  /* z-index: 1000; */
   transition: opacity 3s, z-index 6s;
 
   

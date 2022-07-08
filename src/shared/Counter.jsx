@@ -82,7 +82,7 @@ const Counter = ({title,value,action,secondsLeft,transform }) => {
   }
   return (
     <Flex direction={'column'} align={"center"} transform={transform} transition={'transform .5s'}> 
-        <Text fontSize={{base:"xl",sm:"3xl"}} className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}>
+        <Text fontSize={{base:"xl",sm:"3xl"}} className="b-transition" opacity={secondsLeft ? 0 : 1} height={secondsLeft && 'none'}>
           {title}
         </Text>
         <Button className="b-transition" style={secondsLeft ? {opacity:0,height:"none"} : {opacity:1}}   size="lg" variant='ghost' colorScheme='blackAlpha' ref={ref} onClick={()=>changeValue(1)} onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
@@ -100,7 +100,7 @@ const Counter = ({title,value,action,secondsLeft,transform }) => {
             { secondsLeft && value <= 9 ? "0" + value : secondsLeft && value ? value : valuel + "" + valuer}
           </Numbers>
         </div>
-
+          
           {/* <Numbers>
             {lowerNumber()}
           </Numbers> */}

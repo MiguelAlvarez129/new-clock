@@ -44,16 +44,16 @@ const Timer = () => {
 
   return ( 
     <div>
-      <Flex direction="row" alignItems="center" color={fontColor} fontFamily={fontFamily}>
+      <Flex direction="row" alignItems="center">
         {/* {hours}
         {minutes}
         {seconds} */} 
         <Counter title="Hours" secondsLeft={timeOut} value={hours} action={setHours} transform={ !isRunning && `translate(-${translateValue},0px)`}/>
-        <Numbers marginTop="32px">
+        <Numbers marginTop="32px"  color={fontColor} fontFamily={fontFamily}>
         {isRunning ? ":" : (<Box h={"200px"} w={"2px"} bg="#00000066" m={"0 10px"} />) } 
         </Numbers>
         <Counter title="Minutes" secondsLeft={timeOut} value={minutes} action={setMinutes} />
-        <Numbers marginTop="32px" >
+        <Numbers marginTop="32px"   color={fontColor} fontFamily={fontFamily}>
           {isRunning ? ":" : (<Box h={"200px"} w={"2px"} bg="#00000066" m={"0 10px"}/>) } 
         </Numbers>
         <Counter title="Seconds" secondsLeft={timeOut} value={seconds} action={setSeconds} transform={ !isRunning && `translate(${translateValue},0px)`}/>
@@ -61,15 +61,15 @@ const Timer = () => {
       <ButtonBar>
         {
           !isRunning ?
-          <Button  onClick={timeOut ? resume : startTimer} >
+          <Button  onClick={timeOut ? resume : startTimer} borderRadius={'50%'} h={12} w={12}   >
            <FaPlay/>
           </Button>
         :
         <>
-          <Button onClick={pause}>
+          <Button onClick={pause} borderRadius={'50%'} h={12} w={12}  >
             <FaPause/>
           </Button>
-          <Button onClick={stop}>
+          <Button onClick={stop} borderRadius={'50%'} h={12} w={12}  >
             <FaStop/>
           </Button>
         </>
