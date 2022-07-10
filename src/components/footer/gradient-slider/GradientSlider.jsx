@@ -1,11 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {  Box, SliderTrack, SliderFilledTrack, Button, Text, Input, SimpleGrid, Hide, Flex, Show} from '@chakra-ui/react'
+import {  Box, SliderTrack, SliderFilledTrack, Button, Text, Input, SimpleGrid, Hide, Flex, Show, Grid, GridItem} from '@chakra-ui/react'
 import { FaPlus, FaTimes} from 'react-icons/fa'
 import { ColorSlider, CustomSlider, ColorItem, Item} from '../../../shared/styles'
 import { HexColorPicker} from 'react-colorful'
 import { setBgColor } from '../../../redux/reducers/bgReducer'
-import {useDispatch} from 'react-redux'
-import CircularSlider from '@fseehawer/react-circular-slider'
+import { useDispatch } from 'react-redux'
+import {
+	CircularInput,
+	CircularTrack,
+	CircularProgress,
+	CircularThumb
+} from 'react-circular-input'
 
 const GradientSlider = () => {
 
@@ -86,7 +91,7 @@ const GradientSlider = () => {
           <HexColorPicker color={color.color} onChange={changeColor} style={{width:'100%',margin:"auto"}}/>
       </Item>
       <Item colSpan={{base:2,md:1}} >
-        <Flex justify={"space-between"} align={"center"}>
+        <Flex justify={"space-around"} align={"center"}>
             <Hide below="sm">
               <Button leftIcon={<FaPlus />} onClick={addSlider}>
                   Add Color
@@ -97,7 +102,19 @@ const GradientSlider = () => {
                 <FaPlus />
               </Button>
             </Show>
-            <CircularSlider width={60} dataIndex={deg} knobSize={30} valueFontSize={20} label="*" trackSize={10} onChange={(value) => setDeg(value)}/>
+            <Grid >
+              <GridItem colStart={1} rowStart={1}>
+              <Input type="text" width={'4ch'} m={'15px auto'} display={'block'} h={'35px'} textAlign={'center'} p={0} value={deg} />
+              </GridItem>
+              <GridItem colStart={1} rowStart={1}>
+              <CircularInput value={deg / 360} onChange={(value) => setDeg(Math.floor(value * 360 ))} radius={35}>
+                <CircularTrack strokeWidth={10} />
+                <CircularProgress strokeWidth={10} />
+                <CircularThumb  r={12}/>
+              </CircularInput>
+              </GridItem>
+            </Grid>
+            {/* <CircularSlider width={60} dataIndex={deg} knobSize={30} valueFontSize={20} label="*" trackSize={10} onChange={(value) => setDeg(value)}/> */}
         </Flex>
           <SimpleGrid columns={2} spacing={"2"} mt="10px">
           {sliders.map((e,index)=>(

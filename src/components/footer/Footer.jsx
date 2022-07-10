@@ -28,7 +28,7 @@ const Footer = () => {
                   <b>
                     Gradient Background?
                   </b>
-                 <Switch colorScheme="cyan" size={'md'} onChange={({ target }) => dispatch(switchBgType(target.checked))} />
+                 <Switch colorScheme="cyan" size={'md'} onChange={({ target }) => dispatch(switchBgType(target.checked))} value={bgType} />
                 </Flex>
             </GridItem>
             <GridItem colSpan={2}>
